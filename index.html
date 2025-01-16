@@ -125,7 +125,7 @@
         </div>
 
         <div class="package">
-            <label for="">Percentage Keuntungan (%)</label>
+            <label for="" id="percen">Percentage (%)</label>
             <p class="pisah">:</p>
             <div id="result3" class="result"></div>
         </div>
@@ -138,16 +138,19 @@
             var b = parseFloat(document.getElementById("b").value);
             var c = parseFloat(document.getElementById("c").value);
             var textEstimasi = document.getElementById("estimasi");
+            var textPercen = document.getElementById("percen");
             var inputEstimasi = document.getElementById("result4");
             var inputPercentage = document.getElementById("result3");
 
             // Cek apakah nilai input valid
             if (a < c) {
                 textEstimasi.innerText = "Estimasi Keuntungan";
+                textPercen.innerText = "Percentage Keuntungan (%)";
                 inputEstimasi.style.backgroundColor = "green";
                 inputPercentage.style.backgroundColor = "green";
             } else {
                 textEstimasi.innerText = "Estimasi Kerugian";
+                textPercen.innerText = "Percentage Kerugian (%)";
                 inputEstimasi.style.backgroundColor = "red";
                 inputPercentage.style.backgroundColor = "red";
             }
