@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hitung</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f9;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .package {
+            display: flex;
+            margin-bottom: 10px;
+        }
+
+        label {
+            font-size: 16px;
+            margin: 0;
+            padding: 8px;
+            display: block;
+            width: 40%;
+        }
+
+        .pisah {
+            width: 10%;
+            margin: 0;
+            padding: 8px;
+            text-align: center;
+        }
+
+        input {
+            width: 50%;
+            padding: 8px;
+            margin: 0;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .result {
+            width: 50%;
+            padding: 8px;
+            margin: 0;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: gray;
+            color: white;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Perhitungan Modal</h1>
+        <div class="package">
+            <label for="a">Masukkan Harga Average</label>
+            <p class="pisah">:</p>
+            <input type="number" placeholder="Input Harga Average" id="a" required>
+        </div>
+
+        <div class="package">
+            <label for="a">Masukkan Harga Target</label>
+            <p class="pisah">:</p>
+            <input type="number" placeholder="Input Harga Target" id="c" required>
+        </div>
+
+        <div class="package">
+            <label for="b">Masukkan Jumlah Coin</label>
+            <p class="pisah">:</p>
+            <input type="number" placeholder="Input Jumlah Coin" id="b" required onchange="hitungPerkalian()">
+        </div>
+
+        <div class="package">
+            <label for="">Modal</label>
+            <p class="pisah">:</p>
+            <div id="result" class="result"></div>
+        </div>
+
+        <div class="package">
+            <label for="" id="estimasi">Estimasi</label>
+            <p class="pisah">:</p>
+            <div id="result4" class="result"></div>
+        </div>
+
+        <div class="package">
+            <label for="">Hasil Akhir</label>
+            <p class="pisah">:</p>
+            <div id="result2" class="result"></div>
+        </div>
+
+        <div class="package">
+            <label for="">Percentage Keuntungan (%)</label>
+            <p class="pisah">:</p>
+            <div id="result3" class="result"></div>
+        </div>
+    </div>
+
+    <script>
+        function hitungPerkalian() {
+            // Ambil nilai dari input
+            var a = parseFloat(document.getElementById("a").value);
+            var b = parseFloat(document.getElementById("b").value);
+            var c = parseFloat(document.getElementById("c").value);
+            var textEstimasi = document.getElementById("estimasi");
+            var inputEstimasi = document.getElementById("result4");
+            var inputPercentage = document.getElementById("result3");
+
+            // Cek apakah nilai input valid
+            if (a < c) {
+                textEstimasi.innerText = "Estimasi Keuntungan";
+                inputEstimasi.style.backgroundColor = "green";
+                inputPercentage.style.backgroundColor = "green";
+            } else {
+                textEstimasi.innerText = "Estimasi Kerugian";
+                inputEstimasi.style.backgroundColor = "red";
+                inputPercentage.style.backgroundColor = "red";
+            }
+
+            if (isNaN(a) || isNaN(b) || isNaN(c)) {
+                document.getElementById("result").innerText = "Harap masukkan angka yang valid!";
+            } else {
+                var hasil = a * b;
+                var hasil2 = c * b;
+                var hasil3 = ((c - a) / a);
+                var hasil4 = hasil2 - hasil;
+                document.getElementById("result").innerText = formatCurrency(hasil);
+                document.getElementById("result2").innerText = formatCurrency(hasil2);
+                document.getElementById("result3").innerText = formatToPercentage(hasil3);
+                document.getElementById("result4").innerText = formatCurrency(hasil4);
+            }
+        }
+
+        function formatCurrency(amount) {
+            // Mengubah angka menjadi string dan menambahkan pemisah ribuan
+            return amount.toLocaleString('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+            });
+        }
+
+        function formatToPercentage(value) {
+            return (value * 100).toFixed(2) + '%';
+        }
+    </script>
+
+</body>
+
+</html>
