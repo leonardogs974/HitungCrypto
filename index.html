@@ -81,6 +81,58 @@
         button:hover {
             background-color: #45a049;
         }
+
+        /* Media Queries untuk responsivitas */
+        @media (max-width: 1200px) {
+            label {
+                font-size: 16px;
+                width: 40%;
+            }
+
+            .pisah {
+                width: 10%;
+            }
+
+            input,
+            .result {
+                font-size: 16px;
+                width: 50%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            label {
+                font-size: 15px;
+                width: 30%;
+            }
+
+            .pisah {
+                width: 10%;
+            }
+
+            input,
+            .result {
+                font-size: 15px;
+                width: 60%;
+            }
+        }
+
+        @media (max-width: 500px) {
+            label {
+                font-size: 12px;
+                width: 40%;
+            }
+
+            .pisah {
+                width: 5%;
+            }
+
+            input,
+            .result {
+                font-size: 12px;
+                width: 55%;
+            }
+        }
     </style>
 </head>
 
@@ -95,7 +147,7 @@
         </div>
 
         <div class="package">
-            <label for="a">Masukkan Harga Target</label>
+            <label for="c">Masukkan Harga Target</label>
             <p class="pisah">:</p>
             <input type="number" placeholder="Input Harga Target" id="c" required>
         </div>
@@ -103,7 +155,7 @@
         <div class="package">
             <label for="b">Masukkan Jumlah Coin</label>
             <p class="pisah">:</p>
-            <input type="number" placeholder="Input Jumlah Coin" id="b" required onchange="hitungPerkalian()">
+            <input type="number" placeholder="Input Jumlah Coin" id="b" required onblur="hitungPerkalian()">
         </div>
 
         <div class="package">
@@ -142,22 +194,22 @@
             var inputEstimasi = document.getElementById("result4");
             var inputPercentage = document.getElementById("result3");
 
-            // Cek apakah nilai input valid
-            if (a < c) {
-                textEstimasi.innerText = "Estimasi Keuntungan";
-                textPercen.innerText = "Percentage Keuntungan (%)";
-                inputEstimasi.style.backgroundColor = "green";
-                inputPercentage.style.backgroundColor = "green";
-            } else {
-                textEstimasi.innerText = "Estimasi Kerugian";
-                textPercen.innerText = "Percentage Kerugian (%)";
-                inputEstimasi.style.backgroundColor = "red";
-                inputPercentage.style.backgroundColor = "red";
-            }
-
             if (isNaN(a) || isNaN(b) || isNaN(c)) {
-                document.getElementById("result").innerText = "Harap masukkan angka yang valid!";
+                console.log("");
             } else {
+                // Cek apakah nilai input valid
+                if (a < c) {
+                    textEstimasi.innerText = "Estimasi Keuntungan";
+                    textPercen.innerText = "Percentage Keuntungan (%)";
+                    inputEstimasi.style.backgroundColor = "green";
+                    inputPercentage.style.backgroundColor = "green";
+                } else {
+                    textEstimasi.innerText = "Estimasi Kerugian";
+                    textPercen.innerText = "Percentage Kerugian (%)";
+                    inputEstimasi.style.backgroundColor = "red";
+                    inputPercentage.style.backgroundColor = "red";
+                }
+
                 var hasil = a * b;
                 var hasil2 = c * b;
                 var hasil3 = ((c - a) / a);
@@ -166,6 +218,7 @@
                 document.getElementById("result2").innerText = formatCurrency(hasil2);
                 document.getElementById("result3").innerText = formatToPercentage(hasil3);
                 document.getElementById("result4").innerText = formatCurrency(hasil4);
+
             }
         }
 
