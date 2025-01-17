@@ -20,6 +20,7 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 25px;
         }
 
         h1 {
@@ -49,6 +50,15 @@
 
         input {
             width: 50%;
+            padding: 8px;
+            margin: 0;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        #z {
+            width: 60%;
             padding: 8px;
             margin: 0;
             font-size: 16px;
@@ -98,6 +108,10 @@
                 font-size: 16px;
                 width: 50%;
             }
+            #z {
+                font-size: 16px;
+                width: 60%;
+            }
         }
 
         @media (max-width: 768px) {
@@ -114,6 +128,10 @@
             .result {
                 font-size: 15px;
                 width: 60%;
+            }
+            #z {
+                font-size: 15px;
+                width: 70%;
             }
         }
 
@@ -132,6 +150,10 @@
                 font-size: 12px;
                 width: 55%;
             }
+            #z {
+                font-size: 12px;
+                width: 60%;
+            }
         }
     </style>
 </head>
@@ -139,7 +161,16 @@
 <body>
 
     <div class="container">
-        <h1>Perhitungan Modal</h1>
+        <h1>Perhitungan Crypto</h1>
+
+        <div class="package">
+            <label for="z">Pilih Mata Uang</label>
+            <select id="z">
+                <option value="IDR">IDR</option>
+                <option value="USD">USD</option>
+            </select>
+        </div>
+
         <div class="package">
             <label for="a">Masukkan Harga Average</label>
             <p class="pisah">:</p>
@@ -193,9 +224,10 @@
             var textPercen = document.getElementById("percen");
             var inputEstimasi = document.getElementById("result4");
             var inputPercentage = document.getElementById("result3");
+            var currency = document.getElementById("z").value;
 
             if (isNaN(a) || isNaN(b) || isNaN(c)) {
-                console.log("");
+                console.log("ADA DATA YANG BELUM LENGKAP!");
             } else {
                 if (a < c) {
                     textEstimasi.innerText = "Estimasi Keuntungan";
@@ -213,19 +245,17 @@
                 var hasil2 = c * b;
                 var hasil3 = ((c - a) / a);
                 var hasil4 = hasil2 - hasil;
-                document.getElementById("result").innerText = formatCurrency(hasil);
-                document.getElementById("result2").innerText = formatCurrency(hasil2);
+                document.getElementById("result").innerText = formatCurrency(hasil, currency);
+                document.getElementById("result2").innerText = formatCurrency(hasil2, currency);
                 document.getElementById("result3").innerText = formatToPercentage(hasil3);
-                document.getElementById("result4").innerText = formatCurrency(hasil4);
-
+                document.getElementById("result4").innerText = formatCurrency(hasil4, currency);
             }
         }
 
-        function formatCurrency(amount) {
-            // Mengubah angka menjadi string dan menambahkan pemisah ribuan
+        function formatCurrency(amount, matauang) {
             return amount.toLocaleString('id-ID', {
                 style: 'currency',
-                currency: 'IDR',
+                currency: matauang,
             });
         }
 
