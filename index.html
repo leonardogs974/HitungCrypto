@@ -143,13 +143,13 @@
         <div class="package">
             <label for="a">Masukkan Harga Average</label>
             <p class="pisah">:</p>
-            <input type="number" placeholder="Input Harga Average" id="a" required>
+            <input type="number" placeholder="Input Harga Average" id="a" required onblur="hitungPerkalian()">
         </div>
 
         <div class="package">
             <label for="c">Masukkan Harga Target</label>
             <p class="pisah">:</p>
-            <input type="number" placeholder="Input Harga Target" id="c" required>
+            <input type="number" placeholder="Input Harga Target" id="c" required onblur="hitungPerkalian()">
         </div>
 
         <div class="package">
@@ -197,7 +197,6 @@
             if (isNaN(a) || isNaN(b) || isNaN(c)) {
                 console.log("");
             } else {
-                // Cek apakah nilai input valid
                 if (a < c) {
                     textEstimasi.innerText = "Estimasi Keuntungan";
                     textPercen.innerText = "Percentage Keuntungan (%)";
